@@ -21,7 +21,7 @@ function [R,p]=fwdkin(robot,theta)
     %                               2 - mobile orientation
     %                               3 - mobile translation
     %   
-    %   theta: n-vector of actuator position (expecting radians for
+    %   theta: n-vector of actuator state (expecting radians for
     %                                           rotational states)
     % 
     % output:
@@ -46,9 +46,9 @@ function [R,p]=fwdkin(robot,theta)
     for i = 1:numel(type)
         if any(type(i) == [0 2])        % rotational actuators
             R = R*rot(H(:,i),theta(i));
-            p = p + R*P(:,i+1);
         elseif any(type(i) == [1 3])    % translational actuators
-            p = p + R*(H(:,i)*theta(i) + P(:,i+1));
+            p = p + R*H(:,i)*theta(i);
         end
+        p = p + R*P(:,i+1);
     end
 end
