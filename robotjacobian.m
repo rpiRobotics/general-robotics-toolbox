@@ -37,12 +37,12 @@ function J = robotjacobian(kin, theta)
     
     J = zeros(6,numel(kin.joint_type));
 
-    hi = zeros(3,n);
-    pOi = zeros(3,n+1);
+    hi = zeros(3,numel(kin.joint_type));
+    pOi = zeros(3,numel(kin.joint_type)+1);
     pOi(:,1) = p;
 
     % Compute and store forward kinematics
-    for i = 1:n
+    for i = 1:numel(kin.joint_type)
         if (kin.joint_type(i) == 0 || ...       % rotational actuators
                     kin.joint_type(i) == 2)        
             R = R*rot(kin.H(:,i),theta(i));
@@ -57,7 +57,7 @@ function J = robotjacobian(kin, theta)
 
     p0T = pOi(:,end);
     % Compute Jacobian
-    for i=1:n
+    for i=1:numel(kin.joint_type)
         if (kin.joint_type(i) == 0 || ...       % rotational actuators
                 kin.joint_type(i) == 2)        
             J(:,i)=[hi(:,i); hat(hi(:,i))*(p0T - pOi(:,i))];
