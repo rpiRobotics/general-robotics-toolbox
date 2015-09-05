@@ -58,22 +58,24 @@ function J = robotjacobian(kin, theta)
     p0T = pOi(:,end);
     % Compute Jacobian
     i = 1;
+    j = 1;
     while i <= numel(kin.joint_type)
         if kin.joint_type(i) == 0               % revolute actuators
-            J(:,i) = [hi(:,i); hat(hi(:,i))*(p0T - pOi(:,i))];
-            i = i + 1;
+            J(:,j) = [hi(:,i); hat(hi(:,i))*(p0T - pOi(:,i))];
         elseif kin.joint_type(i) == 1           % prismatic actuators  
-            J(:,i) = [0;0;0; hi(:,i)];
-            i = i + 1;
+            J(:,j) = [0;0;0; hi(:,i)];
         elseif kin.joint_type(i) == 3           % nonholonomic mobile
             % This is a special case, and is dependent on the next
             % two 'joints' following the format for the unicycle model.  
             % Should consider new format in future release.
-            J(:,i) = [0;0;0;rot(hi(:,i+2),theta(i+2))*hi(:,i)];
-            J(:,i+1) = [hi(:,i+2);0;0;0];
+            J(:,j) = [0;0;0;rot(hi(:,i+2),theta(i+2))*hi(:,i)];
+            J(:,j+1) = [hi(:,i+2);0;0;0];
             J = J(:,1:end-1);
-            i = i + 3;
+            i = i + 2;
+            j = j + 1;
         end
+        i = i + 1;
+        j = j + 1;
     end
 end
    
