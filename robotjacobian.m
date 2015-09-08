@@ -69,7 +69,7 @@ function J = robotjacobian(kin, theta)
             % two 'joints' following the format for the unicycle model.  
             % Should consider new format in future release.
             % Linear Velocity
-            J(:,j) = [0;0;0;rot(hi(:,i+2),theta(i+2))*hi(:,i+1)];
+            J(:,j) = [0;0;0;rot(hi(:,i+2),theta(i+2))*hi(:,i)];
             % Angular Velocity
             J(:,j+1) = [hi(:,i+2);hat(hi(:,i+2))*(pOT - pOi(:,i+2))];
             J = J(:,1:end-1);
