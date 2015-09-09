@@ -1,10 +1,10 @@
 function q = R2q(R)
-% R2Q
-%   
-%   q = R2q(R)
-%   
-%   Converts a 3 x 3 Rotation Matrix into a quaternion.  Quaternion is
-%   returned in the form q = [q0;qv].  
+    % R2Q
+    %   
+    %   q = R2q(R)
+    %   
+    %   Converts a 3 x 3 Rotation Matrix into a quaternion.  Quaternion is
+    %   returned in the form q = [q0;qv].  
 
     tr = trace(R);
     q = zeros(4,1);
