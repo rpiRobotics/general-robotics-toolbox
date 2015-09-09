@@ -1,4 +1,8 @@
 function G = screw_matrix(r)
+    % SCREW_MATRIX
+    %
+    % G = screw_matrix(r)
+    %
     % Returns the matrix G representing the 6 x 6 transformation between
     % screws in a rigid body, i.e.
     % 
