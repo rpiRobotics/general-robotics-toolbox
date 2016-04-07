@@ -11,5 +11,5 @@ function Jq = quatjacobian(q)
     q0 = q(1);
     qv = q(2:4);
     
-    Jq = 1/2*[-qv';q0*eye(3)+hat(qv)];
+    Jq = 1/2*[-qv';q0*eye(3)-hat(qv)];
 end
