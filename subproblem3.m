@@ -3,7 +3,7 @@ function theta = subproblem3(p, q, k, d)
 %   theta = subproblem3(p, q, k, d)
 %   
 %   solve for theta in an elbow joint according to
-%   || q + rot(k, theta)*p || = d
+%   || q - rot(k, theta)*p || = d
 %
 %   input: p, q, k as R^3 column vectors, 
 %        d as scalar
