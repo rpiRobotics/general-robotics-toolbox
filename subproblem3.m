@@ -13,9 +13,9 @@ function theta = subproblem3(p, q, k, d)
 
     pp = p - (k'*p)*k;
     qp = q - (k'*q)*k;
-    dpsq = d^2 - (k'*(p+q))^2;
+    dpsq = d^2 - (k'*(p-q))^2;
 
-    bb = -(pp'*pp + qp'*qp - dpsq) / (2*norm(pp)*norm(qp));
+    bb = (pp'*pp + qp'*qp - dpsq) / (2*norm(pp)*norm(qp));
     % cases with no solution
     if dpsq < 0 || abs(bb)>1 
         theta=[];
@@ -23,7 +23,7 @@ function theta = subproblem3(p, q, k, d)
     end
     
     % nominal case
-    theta = subproblem1(-pp/norm(pp), qp/norm(qp), k);
+    theta = subproblem1(pp/norm(pp), qp/norm(qp), k);
     % possible 2 solution case
     phi = acos(bb);
     if abs(phi) > 0
